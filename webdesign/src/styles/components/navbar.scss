@@ -4,7 +4,7 @@
   &-item {
     font-size: 30px;
 
-    @include media("only-xsmall") {
+    @include media("only-xs") {
       font-size: 27px;
     }
 

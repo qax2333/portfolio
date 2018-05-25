@@ -13,7 +13,7 @@
   @extend .font-helvetica-neue-bold;
   letter-spacing: -1px;
 
-  @include media("only-xsmall") {
+  @include media("only-xs") {
     font-size: 33px;
   }
 }
@@ -23,7 +23,7 @@
   font-size: 1.85rem;
   font-weight: 300;
 
-  @include media("only-xsmall") {
+  @include media("only-xs") {
     font-size: 24px;
   }
 }
