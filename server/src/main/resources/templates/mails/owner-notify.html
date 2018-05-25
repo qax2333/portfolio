@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{mail}">
+    <head>
+        <title>Neue Nachricht übers Kontaktformular</title>
+    </head>
+    <body layout:fragment="content">
+        <div class="title" style="font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:600;color:#374550">Du hast eine Nachricht über dein Kontaktformular erhalten!</div>
+        <br>
+
+        <div class="body-text" style="font-family:Helvetica, Arial, sans-serif;font-size:14px;line-height:20px;text-align:left;color:#333333">
+            Absender: <span th:text="${email.email}"></span>
+            <br>
+            Nachricht:
+            <p th:utext="${#strings.replace( #strings.escapeXml(email.message),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></p>
+        </div>
+    </body>
+</html>

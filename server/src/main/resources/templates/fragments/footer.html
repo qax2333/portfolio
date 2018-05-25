@@ -1,0 +1,11 @@
+<thymeleaf xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+           th:fragment="footer" th:remove="tag">
+
+    <div class="footer">
+        Kenneth Wußmann © <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span>
+        <div class="footer__links">
+            <a href="/impressum">Impressum</a> &bullet; <a href="/datenschutz">Datenschutzerklärung</a>
+        </div>
+    </div>
+
+</thymeleaf>

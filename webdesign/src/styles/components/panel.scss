@@ -1,0 +1,31 @@
+.panel {
+  @include bounceInUp();
+  margin-top: 50px;
+  padding: 20px;
+  background-color: $discord-dark-transparent;
+  min-width: 320px;
+  z-index: 10;
+
+  &__header {
+
+  }
+
+  &__content {
+    padding: 20px 0;
+  }
+
+  &__footer {
+    .btn-danger {
+      background-color: $red;
+      color: $white;
+
+      &:hover {
+        background-color: $red-darker;
+      }
+    }
+  }
+
+  .btn {
+    border-radius: 0;
+  }
+}

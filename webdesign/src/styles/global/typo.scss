@@ -1,0 +1,37 @@
+.font-helvetica-neue {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: $red !important;
+}
+
+.font-helvetica-neue-bold {
+  @extend .font-helvetica-neue;
+  font-weight: bold;
+  color: $red !important;
+}
+
+.h1 {
+  @extend .font-helvetica-neue-bold;
+  letter-spacing: -1px;
+
+  @include media("only-xsmall") {
+    font-size: 33px;
+  }
+}
+
+.h4 {
+  @extend .font-helvetica-neue;
+  font-size: 1.85rem;
+  font-weight: 300;
+
+  @include media("only-xsmall") {
+    font-size: 24px;
+  }
+}
+
+a {
+  color: $red;
+
+  &:hover {
+    color: $red;
+  }
+}

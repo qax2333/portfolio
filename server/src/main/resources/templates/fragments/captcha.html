@@ -1,0 +1,15 @@
+<thymeleaf xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+           th:fragment="captcha" th:remove="tag">
+
+    <div class="captcha form-group" th:if="${form != null}">
+        <input type="hidden" name="captchaToken" th:value="${form.captchaToken}" />
+        <div class="col-md-4 captcha__content">
+            <img class="captcha__img" th:attr="src=${'data:image/png;base64, ' + form.captchaImage}" />
+            <div class="form-group">
+                <input type="text" name="captchaResponse" class="form-control" aria-describedby="inputEmailHelp" th:classappend="${#fields.hasErrors('form')} ? 'is-invalid' : ''" required>
+                <small id="inputEmailHelp" class="form-text text-muted">Schreibe den Text auf dem Bild hier rein.</small>
+            </div>
+        </div>
+    </div>
+
+</thymeleaf>

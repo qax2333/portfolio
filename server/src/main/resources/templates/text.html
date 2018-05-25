@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<body>
+
+<div class="container" layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="panel" id="textPanel">
+                <h1 class="panel__header">
+                    <th:block layout:fragment="title"></th:block>
+                </h1>
+                <div class="panel__content">
+                    <th:block layout:fragment="text"></th:block>
+                </div>
+                <div class="panel__footer">
+                    <a class="btn btn-danger" href="/" layout:fragment="back"><i class="fas fa-arrow-left"></i> Zurück</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
