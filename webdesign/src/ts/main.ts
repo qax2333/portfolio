@@ -1,13 +1,12 @@
 import 'jquery';
 import 'popper.js';
 import 'bootstrap';
-import 'particles.js';
-
-declare var particlesJS: any;
-
-particlesJS.load('particles', '/static/particles.json');
+import * as Parallax from 'parallax-js/dist/parallax.min';
 
 $(() => {
+    new Parallax($('#parallax').get(0), {
+        relativeInput: true
+    });
     $('#discordModal').on('show.bs.modal hidden.bs.modal', () => {
         $('.panel').toggle();
     });

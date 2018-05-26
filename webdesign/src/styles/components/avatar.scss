@@ -7,7 +7,7 @@
     );
     border-radius: 100%;
     text-align: center;
-    border: 4px solid $green;
+    height: 150px;
 
     @include media("only-xs") {
       height: 100px;
