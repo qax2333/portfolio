@@ -16,9 +16,10 @@
       @extend #layer-0;
       background-image: url('/static/img/1.png');
     }
-    &-2 {
+    &-2,
+    &-3 {
       @extend #layer-0;
-      background: url('/static/img/2.png') no-repeat fixed right -250px bottom -250px;
+      background: url('/static/img/2.svg') no-repeat fixed right -250px bottom -250px;
 
       @include media("only-xs") {
         background-position: bottom -50px right -50px;
@@ -26,6 +27,9 @@
         width: 107%;
         height: 107%;
       }
+    }
+    &-3 {
+      background-image: url('/static/img/3.svg');
     }
   }
 }
