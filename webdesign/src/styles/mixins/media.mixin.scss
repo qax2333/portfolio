@@ -1,8 +1,14 @@
 @mixin media($viewport) {
   $only-xs: "(min-width: 320px) and (max-width: 519px)";
+  $only-xxs: "(min-width: 320px) and (max-width: 400px)";
 
   @if $viewport == only-xs {
     @media #{$only-xs} {
+      @content;
+    }
+  }
+  @if $viewport == only-xxs {
+    @media #{$only-xxs} {
       @content;
     }
   }

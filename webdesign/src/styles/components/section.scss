@@ -1,0 +1,16 @@
+.section {
+  @include fadeInDown(
+          $delay: 1.5s
+  );
+
+  &__header {
+    @extend .h4;
+    color: $red;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__cards {
+
+  }
+}

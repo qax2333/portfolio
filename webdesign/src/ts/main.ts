@@ -13,4 +13,7 @@ $(() => {
     $('.is-invalid').on('change keyup paste', function() {
         $(this).removeClass("is-invalid");
     });
+    $('.card').click(function() {
+        window.location.href = $(this).find("a.card-link").attr("href").toString();
+    });
 });

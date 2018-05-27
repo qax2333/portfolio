@@ -1,0 +1,88 @@
+.card {
+  border-radius: 0;
+  border: 0;
+  background-color: $discord-dark-transparent;
+  -webkit-box-shadow: 0px 10px 56px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 10px 56px -7px rgba(0,0,0,0.75);
+  box-shadow: 0px 10px 56px -7px rgba(0,0,0,0.75);
+  cursor: pointer;
+  margin-top: 20px;
+
+  &-body {
+
+  }
+
+  &-link {
+    &.btn.btn-dark {
+      border-radius: 0;
+      border: 0;
+      background-color: rgba(52, 58, 64, 0.6);
+
+      &:hover {
+        background-color: rgba(52, 58, 64, 0.9);
+      }
+
+      @include media("only-xxs") {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  }
+
+  &-dots {
+    float: left;
+    display: inline-flex;
+    margin-top: 6px;
+    font-size: 15px;
+
+    @include media("only-xxs") {
+      display: block;
+    }
+
+    .dot {
+      font-size: 15px;
+
+      &:before {
+        @extend .font-awesome;
+        content: "\F111";
+        color: $white;
+        font-size: 10px;
+        margin: 0 7px;
+      }
+    }
+
+    .html {
+      @extend .dot;
+
+      &:before {
+        color: #e34c26;
+      }
+    }
+
+    .java {
+      @extend .dot;
+
+      &:before {
+        color: #b07219;
+      }
+    }
+
+    .sass {
+      @extend .dot;
+
+      &:before {
+        color: #C9598F;
+      }
+    }
+
+    .typescript {
+      @extend .dot;
+
+      &:before {
+        color: #2b7489;
+      }
+    }
+
+  }
+}
