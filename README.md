@@ -1,5 +1,7 @@
 # Portfolio
 
+> :de: Du willst mehr über meine Webseite und ihre Technologien wissen? [Schau hier](https://ketrwu.de/page/project-portfolio)
+
 [My personal website](https://ketrwu.de) powered by
 * Spring Boot & Thymeleaf
 * SCSS & TypeScript

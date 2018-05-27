@@ -6,6 +6,107 @@
 
     <body>
         <th:block layout:fragment="title">Portfolio</th:block>
-        <th:block layout:fragment="text"></th:block>
+        <th:block layout:fragment="text">
+            <p>
+                Mit Portfolio will ich mir eine eigene kleine Spielwiese schaffen und Sachen ausprobieren,
+                die ich schon länger ausprobieren wollte.
+            </p>
+
+            <h3>Technologien, Frameworks und Libraries</h3>
+            <p>
+                Bei meiner Webseite kommen gleich einige Sachen zusammen:
+            </p>
+            <ul>
+                <li>Java</li>
+                <li>Maven</li>
+                <li>Spring Boot</li>
+                <li>Thymeleaf</li>
+                <li>
+                    Webpack
+                    <ul>
+                        <li>
+                            Sass
+                            <ul>
+                                <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap 4</a></li>
+                                <li><a href="https://fontawesome.com/" target="_blank">Fontawesome 5</a></li>
+                                <li><a href="https://github.com/geoffgraham/animate.scss" target="_blank">animate-scss</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            TypeScript
+                            <ul>
+                                <li><a href="https://jquery.com/" target="_blank">jQuery</a></li>
+                                <li><a href="https://github.com/wagerfield/parallax" target="_blank">parallax.js</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p>
+                Da ich Java hauptsächlich und gerne für alles nutze, nutze ich Java natürlich auch hier.
+                Gleichzeitig blieb mir aber auch nichts anderes übrig, denn ich wollte gerne Spring Boot verwenden.
+                Das Spring Framework ist ein mächtiges Werkzeug und aus meiner Java-Welt nicht mehr wegzudenken.
+                Ich bin zwar immer noch dabei alles an Spring auszukundschaften und entdecke immer wieder Neues,
+                habe schon sehr viel Spaß mit dem was ich schon entdecken konnte.
+            </p>
+            <p>
+                Den kompletten Build hält Maven zusammen. Sowohl Backend als auch das Webdesign.<br />
+                Hier kommen natürlich auch noch einige Libraries zusammen, aber eigentlich nichts spezielles oder
+                besonderes. Das <a href="https://github.com/eirslett/frontend-maven-plugin" target="_blank">frontend-maven-plugin</a>
+                ist vielleicht noch erwähnenswert. Damit baue ich das Webdesign zusammen. Es kann eine bestimmte
+                Node und NPM Version runterladen und damit den Webpack Build ausführen.<br />
+                So ist das komplette Paket mit einem Build-Befehl gebaut.
+            </p>
+            <p>
+                Thymeleaf wollte ich ebenfalls gerne mal ausprobieren und bin bisher sehr begeistert.
+                Sonst habe ich nur JSP verwendet, aber mal nach links und rechts schauen kann nie schaden.
+                Thymeleaf hat nette Ansätze und mit dem verwendeten
+                <a href="https://github.com/ultraq/thymeleaf-layout-dialect" target="_blank">Layout Dialect</a>
+                macht das Zusammenstecken der einzelnen Webseiten-Fragmente echt Spaß.
+            </p>
+            <p>
+                Alles folgende wird von Webpack zusammen gebauen, uglyfied und minified.<br />
+                Webpack nutze ich momentan am liebsten. Ich finde die Konfiguration gegenüber anderer Tools etwas
+                eingängiger, aber so komplex ist der Build auch nicht.
+            </p>
+            <p>
+                Mit Sass wurde ich relativ schnell warm und es macht das Styling der Webseite um einiges angenehmer.
+                Außerdem kommen hier noch einige Frameworks und Libraries zum Einsatz, die das Gestalten noch einfacher machen.<br/>
+
+                Mit Bootstrap hab ich schon einige Erfahrungen gemacht und ich nutze es immer wieder gern als Basis,
+                um daraus wieder eigene Webdesigns zu basteln, so wie hier auch.<br/>
+
+                Wer Icons braucht, braucht Fontawesome. Manche Icons finde ich zwar etwas "overused", weil Fontawesome schon
+                lange kein Geheimtipp mehr ist, nichtsdestotrotz eine sehr geliebte Quelle wenn ich mal Icons brauche.<br/>
+
+                Für die kleinen, nicht ganz so subtilen Animationen hier, ist <a href="" target="_blank">animate-scss</a> zuständig.
+                Beziehungsweise <a href="https://github.com/daneden/animate.css" target="_blank">animate.css</a>, von dort
+                kommen die Animationen eigentlich. Animate-SCSS ist nur eine Sammlung an Sass Mixins, um diese Animationen einfacher
+                in seine bestehenden Sass Styles einzubauen. Sehr praktisch.
+            </p>
+            <p>
+                Ich bin kein großer JavaScript Fan, auch wenn ich die Möglichkeiten und Ergebnisse sehr beeindruckend finde.<br />
+                Gerne selber JavaScript schreiben, tue ich allerdings nicht. <br />
+                Daher nutze ich gerne TypeScript, welches am Ende auch nur als JavaScript rauskommt. Es bietet einen Hauch
+                von Typen-Sicherheit und einen mehr oder weniger Objekt-orientierten Ansatz. Auf meiner Webseite kommt
+                TypeScript eigentlich nicht wirklich zum Einsatz. Den JavaScript Zauber der hier passiert, habe ich anderen
+                zu verdanken.<br />
+
+                Sagte ich anderen? Zum Beispiel jQuery. Mein "must-have". Auch wenn ich es hier nicht wirklich viel nutze
+                macht es doch alles angenehmer wenn es zB. um Events geht.<br />
+
+                Das wohl auffälligste auf meiner Seite ist der parallaxe Hintergrund. Den habe ich parallax.js zu verdanken.
+                Das wollte ich auch schon länger mal ausprobieren und ich bin zufrieden. Die Hintergrund Grafiken habe ich selbst
+                in Adobe Illustrator und Photoshop zusammen gebaut. Inspiriert vom Flat-Design von
+                <a href="https://www.youtube.com/user/Kurzgesagt" target="_blank">Kurzgesagt</a>.
+            </p>
+            <p>
+                Letztlich gebaut wird das Projekt von meinem Jenkins-Server. Nach dem Bau wird das Projekt auch direkt
+                hier deployed. Ich muss quasi keinen Finger mehr rühren, was das Entwickeln nochmal angenehmer macht.
+            </p>
+            <h3>GitHub</h3>
+            Natürlich ist das Projekt auf meinem GitHub Profil zu finden:
+            <a href="https://github.com/KennethWussmann/portfolio" target="_blank">https://github.com/KennethWussmann/portfolio</a>
+        </th:block>
     </body>
 </html>
