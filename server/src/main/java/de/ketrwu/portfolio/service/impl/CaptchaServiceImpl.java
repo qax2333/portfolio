@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,8 +23,8 @@ import java.util.List;
 public class CaptchaServiceImpl implements CaptchaService {
 
     private static final Random RANDOM = new Random();
-    private static final int[] IMG_SIZE = {150, 40};
-    private static final int[] SOLUTION_LENGTH = {4, 8};
+    private static final int[] IMG_SIZE = {180, 40};
+    private static final int[] SOLUTION_LENGTH = {4, 7};
     private static final float FONT_SIZE = 20F;
 
     private HashMap<String, String> solutions = new HashMap<>();
@@ -40,10 +41,15 @@ public class CaptchaServiceImpl implements CaptchaService {
         Graphics2D g2d = img.createGraphics();
         g2d.setPaint(Color.white);
         g2d.setFont(getRandomFont());
-        FontMetrics fm = g2d.getFontMetrics();
-        int x = (img.getWidth() / 2) - (fm.stringWidth(solution) / 2);
-        int y = fm.getHeight();
-        g2d.drawString(solution, x, y);
+        byte[] solutionBytes = solution.getBytes();
+
+        for (int i = 0; i < solutionBytes.length; i++) {
+            AffineTransform at = new AffineTransform();
+            at.shear(0.2 * i, 0D);
+            g2d.setTransform(at);
+            g2d.drawString(new String(new byte[]{ solutionBytes[i] }), (int) (Math.random() * 10) + (i * 20), (int) (Math.random() * 10 + 20));
+        }
+
         g2d.dispose();
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
