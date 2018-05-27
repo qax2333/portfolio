@@ -27,7 +27,7 @@ Sadly, webdesign changes only take effect after Intellij Idea: `Build` -> `Rebui
     * `npm run dev`
 
 It'll build the `bundle.css` & `bundle.js` when you change something. 
-These files getting transfered to the `server` static resources path.
+These files getting transferred to the `server` static resources path.
 
 ### Intellij Idea Settings
 This is a helpful thing to develop even faster: https://stackoverflow.com/a/35895848
