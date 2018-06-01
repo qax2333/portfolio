@@ -9,15 +9,17 @@
     <body layout:fragment="text">
         <h2>Angaben gemäß § 5 TMG:</h2>
         <p>
-            Kenneth Wußmann<br />
-            Stormarner Straße 38<br />
-            22049 Hamburg
+            <th:block th:text="${@environment.getProperty('app.address.name')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.street')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.zip')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.country')}"></th:block>
         </p>
         <h2>Verantwortlich für den Inhalt § 55 Abs. 2 RStV:</h2>
         <p>
-            Kenneth Wußmann<br />
-            Stormarner Straße 38<br />
-            22049 Hamburg
+            <th:block th:text="${@environment.getProperty('app.address.name')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.street')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.zip')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.country')}"></th:block>
         </p>
         <h2>Kontakt</h2>
         <p>

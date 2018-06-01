@@ -58,10 +58,10 @@
         <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist die:</p>
 
         <p>
-            Kenneth Wußmann<br />
-            Stormarner Straße 38<br />
-            22049 Hamburg<br />
-            Deutschland
+            <th:block th:text="${@environment.getProperty('app.address.name')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.street')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.zip')}"></th:block><br />
+            <th:block th:text="${@environment.getProperty('app.address.country')}"></th:block>
         </p>
         <p>
             E-Mail: kenneth@wussmann.net<br />
