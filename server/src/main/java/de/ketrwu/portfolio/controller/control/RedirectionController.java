@@ -11,12 +11,12 @@ public class RedirectionController {
     @Autowired
     private TextPageController textPageController;
 
-    @GetMapping("/impressum")
+    @GetMapping({ "/impressum", "/imprint" })
     private String impressum() {
         return textPageController.getTextPage("imprint");
     }
 
-    @GetMapping("/datenschutz")
+    @GetMapping({ "/datenschutz", "/datenschutzerklaerung", "/datenschutzerklärung", "/privacy" })
     private String datenschutz() {
         return textPageController.getTextPage("privacy");
     }
