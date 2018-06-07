@@ -1,4 +1,4 @@
-# Portfolio
+# Portfolio [![Build Status](https://travis-ci.org/KennethWussmann/portfolio.svg?branch=master)](https://travis-ci.org/KennethWussmann/portfolio)
 
 > :de: Du willst mehr über meine Webseite und ihre Technologien wissen? [Schau hier](https://kenneth.wussmann.net/page/project-portfolio)
 
