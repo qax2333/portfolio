@@ -9,18 +9,25 @@
     <body layout:fragment="text">
         <h2>Angaben gemäß § 5 TMG:</h2>
         <p>
-            <th:block th:text="${@environment.getProperty('app.address.name')}"></th:block><br />
-            <th:block th:text="${@environment.getProperty('app.address.street')}"></th:block><br />
-            <th:block th:text="${@environment.getProperty('app.address.zip')}"></th:block><br />
-            <th:block th:text="${@environment.getProperty('app.address.country')}"></th:block>
+            <th:block th:text="${@applicationConfiguration.address.name}"></th:block><br />
+            <th:block th:text="${@applicationConfiguration.address.street}"></th:block><br />
+            <th:block th:text="${@applicationConfiguration.address.zip}"></th:block><br />
+            <th:block th:text="${@applicationConfiguration.address.country}"></th:block>
         </p>
         <h2>Verantwortlich für den Inhalt § 55 Abs. 2 RStV:</h2>
         <p>
-            <th:block th:text="${@environment.getProperty('app.address.name')}"></th:block><br />
-            <th:block th:text="${@environment.getProperty('app.address.street')}"></th:block><br />
-            <th:block th:text="${@environment.getProperty('app.address.zip')}"></th:block><br />
-            <th:block th:text="${@environment.getProperty('app.address.country')}"></th:block>
+            <th:block th:text="${@applicationConfiguration.address.name}"></th:block><br />
+            <th:block th:text="${@applicationConfiguration.address.street}"></th:block><br />
+            <th:block th:text="${@applicationConfiguration.address.zip}"></th:block><br />
+            <th:block th:text="${@applicationConfiguration.address.country}"></th:block>
         </p>
+        <h2>Geltungsbereich dieses Impressums:</h2>
+        <p>
+            Dieses Impressum gilt für folgende Domains, sowie allen Subdomains dieser Domains:
+        </p>
+        <ul>
+            <li th:each="domain : ${@applicationConfiguration.domains}" th:text="${domain}"></li>
+        </ul>
         <h2>Kontakt</h2>
         <p>
             E-Mail: kenneth@wussmann.net<br />
