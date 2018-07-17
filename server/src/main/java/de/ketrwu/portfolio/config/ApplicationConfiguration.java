@@ -13,6 +13,8 @@ public class ApplicationConfiguration {
 
     private String[] domains;
 
+    private String googleSiteVerification;
+
     @Data
     public static class Address {
 

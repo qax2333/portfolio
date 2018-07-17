@@ -1,0 +1,8 @@
+<thymeleaf xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+           th:fragment="site-meta" th:remove="tag">
+
+    <title th:text="${title}"></title>
+    <meta name="description" th:attr="content=${description}" />
+    <meta name="twitter:card" th:attr="value=${description}" />
+
+</thymeleaf>
