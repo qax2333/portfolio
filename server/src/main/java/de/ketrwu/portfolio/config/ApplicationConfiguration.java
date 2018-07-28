@@ -15,6 +15,8 @@ public class ApplicationConfiguration {
 
     private String googleSiteVerification;
 
+    private CloudProxyConfiguration cloud;
+
     @Data
     public static class Address {
 
@@ -22,6 +24,14 @@ public class ApplicationConfiguration {
         private String street;
         private String zip;
         private String country;
+
+    }
+
+    @Data
+    public static class CloudProxyConfiguration {
+
+        private String url;
+        private String token;
 
     }
 }
