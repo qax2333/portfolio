@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node_modules/.bin/webpack --verbose --colors --display-error-details --progress --optimize-minimize",
     "dev": "node_modules/.bin/webpack --verbose --colors --display-error-details --progress --optimize-minimize --watch",
+    "serve": "node_modules/.bin/webpack-dev-server",
     "start": "npm run dev"
   },
   "author": "Kenneth Wußmann",

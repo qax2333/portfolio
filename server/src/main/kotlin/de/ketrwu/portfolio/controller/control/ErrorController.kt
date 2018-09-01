@@ -45,5 +45,4 @@ class ErrorController : org.springframework.boot.web.servlet.error.ErrorControll
         @Slf4j
         lateinit var log: Logger
     }
-
 }

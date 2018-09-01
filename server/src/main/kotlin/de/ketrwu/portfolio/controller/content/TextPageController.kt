@@ -37,5 +37,4 @@ class TextPageController {
         @Slf4j
         lateinit var log: Logger
     }
-
 }

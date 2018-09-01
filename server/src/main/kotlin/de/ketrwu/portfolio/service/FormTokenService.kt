@@ -12,5 +12,4 @@ interface FormTokenService {
     fun isFormTokenValid(form: Form): Boolean
 
     fun invalidateFormToken(form: Form)
-
 }

@@ -1,6 +1,6 @@
 package de.ketrwu.portfolio.forms
 
-import de.ketrwu.portfolio.forms.validation.captcha.Captcha
+import de.ketrwu.portfolio.forms.validation.Captcha
 import javax.validation.constraints.NotEmpty
 
 /**
@@ -8,17 +8,13 @@ import javax.validation.constraints.NotEmpty
  */
 
 @Captcha(message = "Die Captcha-Lösung war nicht korrekt.")
-open class CaptchaForm : Form(formToken = formToken) {
+open class CaptchaForm : Form() {
 
     @NotEmpty
-    val captchaResponse: String? = null
+    var captchaResponse: String? = null
 
     @NotEmpty
-    val captchaToken: String? = null
+    var captchaToken: String? = null
 
-    val captchaImage: String? = null
-
-    val formToken: String? = null
-
-
+    var captchaImage: String? = null
 }

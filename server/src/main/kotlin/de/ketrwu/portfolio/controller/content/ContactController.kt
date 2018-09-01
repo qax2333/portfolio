@@ -17,12 +17,10 @@ class ContactController : FormController<ContactForm>() {
     @Autowired
     private val mailService: MailService? = null
 
-    override fun getTemplate(): String {
-        return "forms/contact"
-    }
+    override val template: String
+        get() = "forms/contact"
 
     override fun onSuccess(form: ContactForm) {
         mailService!!.sendMail(form)
     }
-
 }

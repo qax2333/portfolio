@@ -8,5 +8,4 @@ import de.ketrwu.portfolio.forms.ContactForm
 interface MailService {
 
     fun sendMail(contactForm: ContactForm)
-
 }

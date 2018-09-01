@@ -23,5 +23,4 @@ class RedirectionController {
     private fun datenschutz(): String {
         return textPageController!!.getTextPage("privacy")
     }
-
 }

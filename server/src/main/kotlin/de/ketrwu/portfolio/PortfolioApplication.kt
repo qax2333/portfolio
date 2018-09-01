@@ -7,12 +7,10 @@ import org.springframework.scheduling.annotation.EnableScheduling
 /**
  * @author Kenneth Wußmann
  */
-@SpringBootApplication(scanBasePackages = arrayOf("de.ketrwu.portfolio"))
+@SpringBootApplication(scanBasePackages = ["de.ketrwu.portfolio"])
 @EnableScheduling
-open class PortfolioApplication {
+open class PortfolioApplication
 
-    fun main(args: Array<String>) {
-        SpringApplication.run(PortfolioApplication::class.java, *args)
-    }
-
+fun main(args: Array<String>) {
+    SpringApplication.run(PortfolioApplication::class.java, *args)
 }

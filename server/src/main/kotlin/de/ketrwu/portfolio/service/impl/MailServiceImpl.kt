@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
-import java.util.ArrayList
 
 /**
  * @author Kenneth Wußmann
@@ -38,19 +37,21 @@ class MailServiceImpl : MailService {
     override fun sendMail(contactForm: ContactForm) {
         val ownerMail = buildEmail(contactForm, true)
         val senderMail = buildEmail(contactForm, false)
-        sendMailTemplate(mailOwner, contactForm.getEmail(), "Neue Nachricht von " + contactForm.getEmail(), ownerMail)
-        sendMailTemplate(contactForm.getEmail(), mailOwner, "Deine Anfrage übers Kontaktformular", senderMail)
+        sendMailTemplate(mailOwner, contactForm.email, "Neue Nachricht von " + contactForm.email, ownerMail)
+        sendMailTemplate(contactForm.email, mailOwner, "Deine Anfrage übers Kontaktformular", senderMail)
     }
 
     private fun sendMailTemplate(to: String?, replyTo: String?, subject: String, content: String) {
-        mailQueue.add({ mimeMessage ->
-            val messageHelper = MimeMessageHelper(mimeMessage)
-            messageHelper.setFrom(mailSender!!)
-            messageHelper.setTo(to!!)
-            messageHelper.setReplyTo(replyTo!!)
-            messageHelper.setSubject(subject)
-            messageHelper.setText(content, true)
-        })
+        mailQueue.add(
+            MimeMessagePreparator { mimeMessage ->
+                val messageHelper = MimeMessageHelper(mimeMessage)
+                messageHelper.setFrom(mailSender!!)
+                messageHelper.setTo(to!!)
+                messageHelper.setReplyTo(replyTo!!)
+                messageHelper.setSubject(subject)
+                messageHelper.setText(content, true)
+            }
+        )
     }
 
     private fun buildEmail(contactForm: ContactForm, owner: Boolean): String {
@@ -79,5 +80,4 @@ class MailServiceImpl : MailService {
         @Slf4j
         lateinit var log: Logger
     }
-
 }

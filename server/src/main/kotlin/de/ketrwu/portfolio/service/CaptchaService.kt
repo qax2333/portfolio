@@ -14,5 +14,4 @@ interface CaptchaService {
     fun checkCaptcha(captchaForm: CaptchaForm): Boolean
 
     fun loadFonts()
-
 }

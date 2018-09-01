@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Configuration
  */
 @Configuration
 @ConfigurationProperties(prefix = "app")
-data class ApplicationConfiguration (
-        val address: Address,
-        val domains: Array<String>,
-        val googleSiteVerification: String
-) {
-    data class Address (
-            val name: String,
-            val street: String,
-            val zip: String,
-            val country: String
-    )
+open class ApplicationConfiguration {
+    var address: Address? = null
+    var domains: Array<String>? = emptyArray()
+    var googleSiteVerification: String? = null
+
+    class Address {
+        var name: String? = null
+        var street: String? = null
+        var zip: String? = null
+        var country: String? = null
+    }
 }

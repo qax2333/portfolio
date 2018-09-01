@@ -13,5 +13,4 @@ class IndexController {
     fun index(): String {
         return "content/home"
     }
-
 }

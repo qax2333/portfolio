@@ -11,15 +11,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
  * @author Kenneth Wußmann
  */
 @Configuration
-class WebConfiguration {
+open class WebConfiguration {
 
     @Bean
-    fun configurer(): WebMvcConfigurer {
+    open fun configurer(): WebMvcConfigurer {
         return object : WebMvcConfigurer {
             override fun addResourceHandlers(registry: ResourceHandlerRegistry?) {
                 registry!!
-                        .addResourceHandler("/webfonts/**")
-                        .addResourceLocations("classpath:/static/webfonts/")
+                    .addResourceHandler("/webfonts/**")
+                    .addResourceLocations("classpath:/static/webfonts/")
             }
 
             override fun configurePathMatch(configurer: PathMatchConfigurer?) {
@@ -27,8 +27,6 @@ class WebConfiguration {
                 matcher.setCaseSensitive(false)
                 configurer!!.pathMatcher = matcher
             }
-
         }
     }
-
 }
