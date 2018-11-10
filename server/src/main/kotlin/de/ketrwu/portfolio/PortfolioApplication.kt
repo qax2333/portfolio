@@ -16,10 +16,7 @@ open class PortfolioApplication : SpringBootServletInitializer() {
     override fun configure(builder: SpringApplicationBuilder?): SpringApplicationBuilder {
         return builder!!.sources(PortfolioApplication::class.java)
     }
-
 }
-
-
 
 fun main(args: Array<String>) {
     SpringApplication.run(PortfolioApplication::class.java, *args)
