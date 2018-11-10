@@ -3,6 +3,7 @@
 > :de: Du willst mehr über meine Webseite und ihre Technologien wissen? [Schau hier](https://kenneth.wussmann.net/page/project-portfolio)
 
 [My personal website](https://kenneth.wussmann.net) powered by
+* Kotlin
 * Spring Boot & Thymeleaf
 * SCSS & TypeScript
 
@@ -19,20 +20,18 @@ Thymeleaf (HTML) changes will also be reloaded on the server in no time.
 Sadly, webdesign changes only take effect after Intellij Idea: `Build` -> `Rebuild project`. Maybe I'll find a better solution for that.
 
 ### Build
-> Do this before starting with something else.
-
 * In the root of this project:
     * `mvn clean install`
+* To also clean webdesign dependencies:
+    * `mvn clean install -Pfrontend-clean`
 
-### Start the webdesign watcher
+### Start the webdesign proxy
+During development you'll need a proxy that serves the written SCSS/JS on the fly:
 * In `webdesign`:
-    * `npm run dev`
+    * `npm run serve`
 
-It'll build the `bundle.css` & `bundle.js` when you change something. 
-These files getting transferred to the `server` static resources path.
+It'll start a webserver on `http://localhost:4000`:
+* `/**` = Will proxy to port `8080`. Start the `server` on this port
+* `/static/bundle.*` = Will serve the latest built SCSS/JS
 
-### Intellij Idea Settings
-This is a helpful thing to develop even faster: https://stackoverflow.com/a/35895848
-
-It will automatically build changes in your Java code.
-
+Changes made to SCSS/JS will automatically build and update in your browser.

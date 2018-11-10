@@ -68,6 +68,14 @@
       }
     }
 
+    .kotlin {
+      @extend .dot;
+
+      &:before {
+        color: #ef832d;
+      }
+    }
+
     .sass {
       @extend .dot;
 

@@ -8,8 +8,17 @@ module.exports = {
         './src/scss/main.scss'
     ],
     devtool: 'inline-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, 'target'),
+        compress: true,
+        port: 4000,
+        publicPath: 'http://localhost:4000/static/',
+        proxy: {
+            '/': 'http://localhost:8080'
+        }
+    },
     output: {
-        path: path.resolve('../server/src/main/resources/static'),
+        path: path.resolve('./target/webdesign'),
         filename: 'bundle.js'
     },
     module: {
