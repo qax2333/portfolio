@@ -11,7 +11,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'portfolio-prd-properties', variable: 'PORTFOLIO_PROPERTIES')]) {
                     sh 'cp $PORTFOLIO_PROPERTIES ./server/src/main/resources/application.properties'
                     sh 'mvn clean install -Pfrontend-clean'
-                    archiveArtifacts 'server/target/*.jar'
+                    archiveArtifacts 'server/target/*.war'
                 }
             }
         }
