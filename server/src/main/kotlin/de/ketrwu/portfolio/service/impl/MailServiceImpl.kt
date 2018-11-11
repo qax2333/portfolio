@@ -1,6 +1,7 @@
 package de.ketrwu.portfolio.service.impl
 
 import de.ketrwu.portfolio.Slf4j
+import de.ketrwu.portfolio.exception.MailTemplateException
 import de.ketrwu.portfolio.forms.ContactForm
 import de.ketrwu.portfolio.service.MailService
 import org.slf4j.Logger
@@ -39,10 +40,14 @@ class MailServiceImpl : MailService {
      * {@inheritDoc}
      */
     override fun sendMail(contactForm: ContactForm) {
-        val ownerMail = buildEmail(contactForm, true)
-        val senderMail = buildEmail(contactForm, false)
-        sendMailTemplate(mailOwner, contactForm.email, "Neue Nachricht von " + contactForm.email, ownerMail)
-        sendMailTemplate(contactForm.email, mailOwner, "Deine Anfrage übers Kontaktformular", senderMail)
+        try {
+            val ownerMail = buildEmail(contactForm, true)
+            val senderMail = buildEmail(contactForm, false)
+            sendMailTemplate(mailOwner, contactForm.email, "Neue Nachricht von " + contactForm.email, ownerMail)
+            sendMailTemplate(contactForm.email, mailOwner, "Deine Anfrage übers Kontaktformular", senderMail)
+        } catch (e: MailTemplateException) {
+            log.error(e.message, e)
+        }
     }
 
     private fun sendMailTemplate(to: String?, replyTo: String?, subject: String, content: String) {
@@ -58,6 +63,7 @@ class MailServiceImpl : MailService {
         )
     }
 
+    @Throws(MailTemplateException::class)
     private fun buildEmail(contactForm: ContactForm, owner: Boolean): String {
         val context = Context()
         context.setVariable("email", contactForm)
@@ -65,7 +71,7 @@ class MailServiceImpl : MailService {
             templateEngine?.process("mails/owner-notify", context)
         } else {
             templateEngine?.process("mails/sender-notify", context)
-        } ?: throw RuntimeException("Failed to build mail template")
+        } ?: throw MailTemplateException("Failed to render template")
     }
 
     // every 10 minutes

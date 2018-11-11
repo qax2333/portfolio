@@ -34,6 +34,6 @@ class CaptchaValidator : ConstraintValidator<Captcha, CaptchaForm> {
     override fun initialize(captcha: Captcha?) {}
 
     override fun isValid(captchaForm: CaptchaForm, cxt: ConstraintValidatorContext): Boolean {
-        return captchaService?.checkCaptcha(captchaForm) ?: throw RuntimeException("Failed to validate captcha in form")
+        return captchaService?.checkCaptcha(captchaForm) ?: false
     }
 }

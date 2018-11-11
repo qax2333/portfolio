@@ -84,11 +84,9 @@ abstract class FormController<T : Form> {
     @Throws(IOException::class, IllegalAccessException::class, InstantiationException::class)
     private fun resetForm(form: T): T {
         return form.javaClass.newInstance().let {
-            if (it is T) {
-                formTokenService?.tokenize(it)
-                if (it is CaptchaForm) {
-                    captchaService?.createCaptcha(it as CaptchaForm)
-                }
+            formTokenService?.tokenize(it)
+            if (it is CaptchaForm) {
+                captchaService?.createCaptcha(it)
             }
             it
         }
