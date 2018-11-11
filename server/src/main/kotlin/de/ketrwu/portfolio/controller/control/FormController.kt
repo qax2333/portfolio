@@ -51,7 +51,7 @@ abstract class FormController<T : Form> {
             formTokenService?.invalidateFormToken(form)
             form = resetForm(form)
         } else if (form is CaptchaForm) {
-            captchaService?.createCaptcha(form as CaptchaForm)
+            captchaService?.createCaptcha(form)
         }
 
         if (bindingResult.hasErrors()) {
