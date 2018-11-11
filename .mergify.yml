@@ -1,0 +1,8 @@
+pull_request_rules:
+- name: automatic merge on CI success and review
+  conditions:
+  - status-success=continuous-integration/jenkins/pr-merge
+  - status-success=continuous-integration/jenkins/branch
+  actions:
+    merge:
+      method: merge
