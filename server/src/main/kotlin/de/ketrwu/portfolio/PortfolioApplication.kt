@@ -13,8 +13,8 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @EnableScheduling
 open class PortfolioApplication : SpringBootServletInitializer() {
 
-    override fun configure(builder: SpringApplicationBuilder?): SpringApplicationBuilder {
-        return builder!!.sources(PortfolioApplication::class.java)
+    override fun configure(builder: SpringApplicationBuilder?): SpringApplicationBuilder? {
+        return builder?.sources(PortfolioApplication::class.java)
     }
 }
 
