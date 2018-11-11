@@ -6,18 +6,25 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 
 /**
+ * Debug controller to have a preview of a the rendered mail template
  * @author Kenneth Wußmann
  */
 @Controller
 @ConditionalOnExpression("\${app.debug:false}")
 class MailPreviewController {
 
+    /**
+     * Get the rendered mail template sent to the owner
+     */
     @GetMapping("/mail/owner")
     fun getMailPreview(model: MutableMap<String, Any>): String {
         model["email"] = createFakeMail()
         return "mails/owner-notify.html"
     }
 
+    /**
+     * Get the rendered mail template sent to the sender
+     */
     @GetMapping("/mail/sender")
     fun getMailSenderPreview(model: MutableMap<String, Any>): String {
         model["email"] = createFakeMail()

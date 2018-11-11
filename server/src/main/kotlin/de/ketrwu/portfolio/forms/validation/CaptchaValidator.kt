@@ -9,6 +9,10 @@ import javax.validation.ConstraintValidatorContext
 import javax.validation.Payload
 import kotlin.reflect.KClass
 
+/**
+ * Annotation to assign CaptchaValidator to a class
+ * @author Kenneth Wußmann
+ */
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE)
 @Constraint(validatedBy = [CaptchaValidator::class])
 @Retention(AnnotationRetention.RUNTIME)
@@ -18,6 +22,10 @@ annotation class Captcha(
     val payload: Array<KClass<out Payload>> = []
 )
 
+/**
+ * ConstraintValidator to validate captcha response in a form
+ * @author Kenneth Wußmann
+ */
 class CaptchaValidator : ConstraintValidator<Captcha, CaptchaForm> {
 
     @Autowired
@@ -26,6 +34,6 @@ class CaptchaValidator : ConstraintValidator<Captcha, CaptchaForm> {
     override fun initialize(captcha: Captcha?) {}
 
     override fun isValid(captchaForm: CaptchaForm, cxt: ConstraintValidatorContext): Boolean {
-        return captchaService!!.checkCaptcha(captchaForm)
+        return captchaService?.checkCaptcha(captchaForm) ?: false
     }
 }

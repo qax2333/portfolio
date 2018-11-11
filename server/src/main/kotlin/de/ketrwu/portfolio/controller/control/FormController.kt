@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import java.io.IOException
 
+/**
+ * Abstract controller to handle form submission and validation
+ * @author Kenneth Wußmann
+ */
 @Controller
-open abstract class FormController<T : Form> {
+abstract class FormController<T : Form> {
 
     @Autowired
     private val captchaService: CaptchaService? = null
@@ -25,6 +29,9 @@ open abstract class FormController<T : Form> {
 
     abstract val template: String
 
+    /**
+     * GetMapping for handling the loading of a form
+     */
     @GetMapping
     @Throws(IllegalAccessException::class, IOException::class, InstantiationException::class)
     fun getForm(@ModelAttribute("form") form: T, model: MutableMap<String, Any>): String {
@@ -32,16 +39,19 @@ open abstract class FormController<T : Form> {
         return template
     }
 
+    /**
+     * PostMapping for handling form submission and validation
+     */
     @PostMapping
     @Throws(IllegalAccessException::class, InstantiationException::class, IOException::class)
     fun submitForm(@ModelAttribute("form") @Validated _form: T, bindingResult: BindingResult, model: MutableMap<String, Any>): String {
         var form = _form
         if (!bindingResult.hasErrors()) {
             onSuccess(form)
-            formTokenService!!.invalidateFormToken(form)
+            formTokenService?.invalidateFormToken(form)
             form = resetForm(form)
         } else if (form is CaptchaForm) {
-            captchaService!!.createCaptcha(form as CaptchaForm)
+            captchaService?.createCaptcha(form)
         }
 
         if (bindingResult.hasErrors()) {
@@ -53,12 +63,12 @@ open abstract class FormController<T : Form> {
             if (error.code == FormToken::class.java.simpleName) {
                 onResubmit(form)
                 errors.clear()
-                errors.add(error.defaultMessage!!)
-                formTokenService!!.invalidateFormToken(form)
+                error.defaultMessage?.let(errors::add)
+                formTokenService?.invalidateFormToken(form)
                 form = resetForm(form)
                 break
             }
-            errors.add(error.defaultMessage!!)
+            error.defaultMessage?.let(errors::add)
         }
 
         errors.reverse()
@@ -73,17 +83,27 @@ open abstract class FormController<T : Form> {
 
     @Throws(IOException::class, IllegalAccessException::class, InstantiationException::class)
     private fun resetForm(form: T): T {
-        val newform = form.javaClass.newInstance() as T
-        formTokenService!!.tokenize(newform)
-        if (newform is CaptchaForm) {
-            captchaService!!.createCaptcha(newform as CaptchaForm)
+        return form.javaClass.newInstance().let {
+            formTokenService?.tokenize(it)
+            if (it is CaptchaForm) {
+                captchaService?.createCaptcha(it)
+            }
+            it
         }
-        return newform
     }
 
+    /**
+     * Everything was fine, tell the controller if needed
+     */
     open fun onSuccess(form: T) {}
 
+    /**
+     * Someone resubmitted a form (Page-Refresh), tell the controller if needed
+     */
     open fun onResubmit(form: T) {}
 
+    /**
+     * A validation error occurred, tell the controller if needed
+     */
     open fun onError(form: T, bindingResult: BindingResult) {}
 }

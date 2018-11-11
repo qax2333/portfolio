@@ -1,6 +1,7 @@
 package de.ketrwu.portfolio.service.impl
 
 import de.ketrwu.portfolio.Slf4j
+import de.ketrwu.portfolio.exception.MailTemplateException
 import de.ketrwu.portfolio.forms.ContactForm
 import de.ketrwu.portfolio.service.MailService
 import org.slf4j.Logger
@@ -15,6 +16,7 @@ import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 
 /**
+ * Implementation of a MailService to build mail templates and send them using a queuing
  * @author Kenneth Wußmann
  */
 @Service
@@ -34,34 +36,42 @@ class MailServiceImpl : MailService {
 
     private val mailQueue = ArrayList<MimeMessagePreparator>()
 
+    /**
+     * {@inheritDoc}
+     */
     override fun sendMail(contactForm: ContactForm) {
-        val ownerMail = buildEmail(contactForm, true)
-        val senderMail = buildEmail(contactForm, false)
-        sendMailTemplate(mailOwner, contactForm.email, "Neue Nachricht von " + contactForm.email, ownerMail)
-        sendMailTemplate(contactForm.email, mailOwner, "Deine Anfrage übers Kontaktformular", senderMail)
+        try {
+            val ownerMail = buildEmail(contactForm, true)
+            val senderMail = buildEmail(contactForm, false)
+            sendMailTemplate(mailOwner, contactForm.email, "Neue Nachricht von " + contactForm.email, ownerMail)
+            sendMailTemplate(contactForm.email, mailOwner, "Deine Anfrage übers Kontaktformular", senderMail)
+        } catch (e: MailTemplateException) {
+            log.error(e.message, e)
+        }
     }
 
     private fun sendMailTemplate(to: String?, replyTo: String?, subject: String, content: String) {
         mailQueue.add(
             MimeMessagePreparator { mimeMessage ->
                 val messageHelper = MimeMessageHelper(mimeMessage)
-                messageHelper.setFrom(mailSender!!)
-                messageHelper.setTo(to!!)
-                messageHelper.setReplyTo(replyTo!!)
+                mailSender?.let { messageHelper.setFrom(it) }
+                to?.let { messageHelper.setTo(it) }
+                replyTo?.let { messageHelper.setReplyTo(it) }
                 messageHelper.setSubject(subject)
                 messageHelper.setText(content, true)
             }
         )
     }
 
+    @Throws(MailTemplateException::class)
     private fun buildEmail(contactForm: ContactForm, owner: Boolean): String {
         val context = Context()
         context.setVariable("email", contactForm)
         return if (owner) {
-            templateEngine!!.process("mails/owner-notify", context)
+            templateEngine?.process("mails/owner-notify", context)
         } else {
-            templateEngine!!.process("mails/sender-notify", context)
-        }
+            templateEngine?.process("mails/sender-notify", context)
+        } ?: throw MailTemplateException("Failed to render template")
     }
 
     // every 10 minutes
@@ -70,7 +80,7 @@ class MailServiceImpl : MailService {
         if (mailQueue.size > 0) {
             log.info("Sending {} mails from queue", mailQueue.size)
             for (mimeMessagePreparator in mailQueue) {
-                emailSender!!.send(mimeMessagePreparator)
+                emailSender?.send(mimeMessagePreparator)
             }
             mailQueue.clear()
         }
