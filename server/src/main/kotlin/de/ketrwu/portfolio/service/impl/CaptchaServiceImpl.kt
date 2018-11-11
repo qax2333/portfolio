@@ -22,6 +22,10 @@ import java.util.Random
 import java.util.UUID
 import javax.imageio.ImageIO
 
+/**
+ * Service to create captcha images for the frontend and validate captcha answers
+ * @author Kenneth Wußmann
+ */
 @Service
 class CaptchaServiceImpl : CaptchaService {
 
@@ -38,12 +42,17 @@ class CaptchaServiceImpl : CaptchaService {
             true
         ).toLowerCase()
 
+    /**
+     * {@inheritDoc}
+     */
     @Throws(IOException::class)
     override fun createCaptcha(captchaForm: CaptchaForm): String {
         val solution = randomString
 
-        captchaForm.captchaToken = UUID.randomUUID().toString()
-        solutions[captchaForm.captchaToken!!] = solution
+        UUID.randomUUID().toString().let {
+            captchaForm.captchaToken = it
+            solutions[it] = solution
+        }
 
         val img = BufferedImage(IMG_SIZE[0], IMG_SIZE[1], BufferedImage.TYPE_INT_ARGB)
         val g2d = img.createGraphics()
@@ -63,27 +72,38 @@ class CaptchaServiceImpl : CaptchaService {
         val os = ByteArrayOutputStream()
         ImageIO.write(img, "png", os)
 
-        captchaForm.captchaImage = Base64.getEncoder().encodeToString(os.toByteArray())
-        return captchaForm.captchaImage!!
+        return Base64.getEncoder().encodeToString(os.toByteArray()).let {
+            captchaForm.captchaImage = it
+            it
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     override fun checkCaptcha(captchaForm: CaptchaForm): Boolean {
-        if (captchaForm.captchaToken == null || captchaForm.captchaToken!!.trim { it <= ' ' }.isEmpty()) {
+        if (captchaForm.captchaToken?.trim { it <= ' ' }?.isEmpty() != false) {
             return false
         }
-        if (captchaForm.captchaResponse == null || captchaForm.captchaResponse!!.trim { it <= ' ' }.isEmpty()) {
+        if (captchaForm.captchaResponse?.trim { it <= ' ' }?.isEmpty() != false) {
             return false
         }
-        if (solutions[captchaForm.captchaToken!!] == null) {
+        if (captchaForm.captchaToken?.let { solutions[it] == null } == true) {
             return false
         }
 
-        val result = solutions[captchaForm.captchaToken!!].equals(captchaForm.captchaResponse!!, ignoreCase = true)
-        solutions.remove(captchaForm.captchaToken!!)
-
-        return result
+        return captchaForm.captchaToken?.let { captchaToken ->
+            val solution = solutions[captchaToken]
+            solutions.remove(captchaToken)
+            captchaForm.captchaResponse?.let {
+                solution.equals(it, true)
+            }
+        } ?: false
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @EventListener(ApplicationReadyEvent::class)
     override fun loadFonts() {
         fonts.clear()
@@ -91,24 +111,26 @@ class CaptchaServiceImpl : CaptchaService {
         val resolver = PathMatchingResourcePatternResolver(cl)
         try {
             for (resource in resolver.getResources("classpath*:/static/captcha-fonts/*.ttf")) {
-                fonts.add(createFont(resource))
+                createFont(resource)?.let {
+                    fonts.add(it)
+                }
             }
         } catch (e: IOException) {
             log.error("Failed to find fonts in classpath", e)
         }
     }
 
-    private fun createFont(resource: Resource): Font {
+    private fun createFont(resource: Resource): Font? {
         var font: Font? = null
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, resource.inputStream)
-            font = font!!.deriveFont(FONT_SIZE)
+            font = font?.deriveFont(FONT_SIZE)
         } catch (e: FontFormatException) {
             log.error("Failed to create font of file \"{}\"", resource.filename, e)
         } catch (e: IOException) {
             log.error("Failed to create font of file \"{}\"", resource.filename, e)
         }
-        return font!!
+        return font
     }
 
     companion object {

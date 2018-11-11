@@ -9,6 +9,10 @@ import javax.validation.ConstraintValidatorContext
 import javax.validation.Payload
 import kotlin.reflect.KClass
 
+/**
+ * Annotation to assign FormTokenValidator to a class
+ * @author Kenneth Wußmann
+ */
 @Constraint(validatedBy = [FormTokenValidator::class])
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
@@ -18,6 +22,10 @@ annotation class FormToken(
     val payload: Array<KClass<out Payload>> = []
 )
 
+/**
+ * ConstraintValidator to validate token of a form
+ * @author Kenneth Wußmann
+ */
 class FormTokenValidator : ConstraintValidator<FormToken, Form> {
 
     @Autowired
@@ -26,6 +34,6 @@ class FormTokenValidator : ConstraintValidator<FormToken, Form> {
     override fun initialize(formToken: FormToken?) {}
 
     override fun isValid(form: Form, cxt: ConstraintValidatorContext): Boolean {
-        return formTokenService!!.isFormTokenValid(form)
+        return formTokenService?.isFormTokenValid(form) ?: false
     }
 }

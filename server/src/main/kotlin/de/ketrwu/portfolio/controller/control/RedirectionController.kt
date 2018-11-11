@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 
 /**
+ * Controller that serves TextPages under another alias-path
  * @author Kenneth Wußmann
  */
 @Controller
@@ -16,11 +17,11 @@ class RedirectionController {
 
     @GetMapping("/impressum", "/imprint")
     private fun impressum(): String {
-        return textPageController!!.getTextPage("imprint")
+        return textPageController?.getTextPage("imprint") ?: "/"
     }
 
     @GetMapping("/datenschutz", "/datenschutzerklaerung", "/datenschutzerklärung", "/privacy")
     private fun datenschutz(): String {
-        return textPageController!!.getTextPage("privacy")
+        return textPageController?.getTextPage("privacy") ?: "/"
     }
 }

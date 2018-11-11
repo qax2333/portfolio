@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 
 /**
+ * FormController to handle contact form submissions
  * @author Kenneth Wußmann
  */
 @Controller
@@ -21,6 +22,6 @@ class ContactController : FormController<ContactForm>() {
         get() = "forms/contact"
 
     override fun onSuccess(form: ContactForm) {
-        mailService!!.sendMail(form)
+        mailService?.sendMail(form)
     }
 }

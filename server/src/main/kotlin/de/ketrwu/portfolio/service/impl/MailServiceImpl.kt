@@ -15,6 +15,7 @@ import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 
 /**
+ * Implementation of a MailService to build mail templates and send them using a queuing
  * @author Kenneth Wußmann
  */
 @Service
@@ -34,6 +35,9 @@ class MailServiceImpl : MailService {
 
     private val mailQueue = ArrayList<MimeMessagePreparator>()
 
+    /**
+     * {@inheritDoc}
+     */
     override fun sendMail(contactForm: ContactForm) {
         val ownerMail = buildEmail(contactForm, true)
         val senderMail = buildEmail(contactForm, false)
@@ -45,9 +49,9 @@ class MailServiceImpl : MailService {
         mailQueue.add(
             MimeMessagePreparator { mimeMessage ->
                 val messageHelper = MimeMessageHelper(mimeMessage)
-                messageHelper.setFrom(mailSender!!)
-                messageHelper.setTo(to!!)
-                messageHelper.setReplyTo(replyTo!!)
+                mailSender?.let { messageHelper.setFrom(it) }
+                to?.let { messageHelper.setTo(it) }
+                replyTo?.let { messageHelper.setReplyTo(it) }
                 messageHelper.setSubject(subject)
                 messageHelper.setText(content, true)
             }
@@ -58,10 +62,10 @@ class MailServiceImpl : MailService {
         val context = Context()
         context.setVariable("email", contactForm)
         return if (owner) {
-            templateEngine!!.process("mails/owner-notify", context)
+            templateEngine?.process("mails/owner-notify", context)
         } else {
-            templateEngine!!.process("mails/sender-notify", context)
-        }
+            templateEngine?.process("mails/sender-notify", context)
+        } ?: throw RuntimeException("Failed to build mail template")
     }
 
     // every 10 minutes
@@ -70,7 +74,7 @@ class MailServiceImpl : MailService {
         if (mailQueue.size > 0) {
             log.info("Sending {} mails from queue", mailQueue.size)
             for (mimeMessagePreparator in mailQueue) {
-                emailSender!!.send(mimeMessagePreparator)
+                emailSender?.send(mimeMessagePreparator)
             }
             mailQueue.clear()
         }

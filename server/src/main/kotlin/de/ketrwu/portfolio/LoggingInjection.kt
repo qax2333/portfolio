@@ -7,23 +7,30 @@ import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.companionObjectInstance
 import kotlin.reflect.full.declaredMemberProperties
 
+/**
+ * Annotation to mark properties where a slf4j logger should be injected
+ */
 @Target(AnnotationTarget.PROPERTY)
 annotation class Slf4j
 
+/**
+ * BeanPostProcessor that injects a slf4j logger in annotated properties
+ * @author Kenneth Wußmann
+ */
 @Component
 class LoggingInjector : BeanPostProcessor {
 
     override fun postProcessBeforeInitialization(bean: Any, beanName: String) =
         bean.also {
             try {
-                val loggerName = it::class.java.canonicalName!!
+                val loggerName = it::class.java.canonicalName
                 processObject(it, loggerName)
                 it::class.companionObjectInstance?.let { companion ->
                     processObject(companion, loggerName)
                 }
             } catch (ignored: Throwable) {
                 // ignore exceptions, keep the object as it is. not every required class may be found on the classpath as
-                // SpringBoot tries to load notexisting stuff as well
+                // SpringBoot tries to load not existing stuff as well
             }
         }
 
