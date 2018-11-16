@@ -14,8 +14,9 @@ import org.slf4j.Logger
 import org.springframework.core.io.Resource
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.stereotype.Service
+import org.springframework.util.FileCopyUtils
 import java.io.IOException
-import java.nio.file.Files
+import java.io.InputStreamReader
 
 /**
  * Implementation of a TextPageService to resolve and render html and md files
@@ -86,8 +87,8 @@ class TextPageServiceImpl : TextPageService {
      * {@inheritDoc}
      */
     override fun renderMarkdown(page: String): MarkdownTextPage {
-        return getResource(page, "md", "/templates/content/text/markdown")?.let {
-            val markdown = String(Files.readAllBytes(it.file.toPath()))
+        return getResource(page, "md", "/templates/content/text/markdown")?.let { resource ->
+            val markdown = FileCopyUtils.copyToString(InputStreamReader(resource.inputStream))
             val node = markdownParser.parse(markdown)
             val yamlFrontMatterVisitor = YamlFrontMatterVisitor()
             node.accept(yamlFrontMatterVisitor)
@@ -96,7 +97,6 @@ class TextPageServiceImpl : TextPageService {
             val headline = yamlFrontMatterVisitor.data["headline"]!![0]
             val description = yamlFrontMatterVisitor.data["description"]!![0]
             val rendered = htmlRenderer.render(node)
-
             return MarkdownTextPage(title, headline, description, rendered)
         } ?: MarkdownTextPage()
     }
