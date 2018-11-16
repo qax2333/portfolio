@@ -88,7 +88,10 @@ class TextPageServiceImpl : TextPageService {
      */
     override fun renderMarkdown(page: String): MarkdownTextPage {
         return getResource(page, "md", "/templates/content/text/markdown")?.let { resource ->
-            val markdown = FileCopyUtils.copyToString(InputStreamReader(resource.inputStream))
+            val markdown = FileCopyUtils.copyToString(InputStreamReader(
+                resource.inputStream,
+                charset("UTF-8")
+            ))
             val node = markdownParser.parse(markdown)
             val yamlFrontMatterVisitor = YamlFrontMatterVisitor()
             node.accept(yamlFrontMatterVisitor)
