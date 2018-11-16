@@ -22,5 +22,4 @@ interface TextPageService {
      * Render a Markdown file to HTML
      */
     fun renderMarkdown(page: String): MarkdownTextPage
-
 }

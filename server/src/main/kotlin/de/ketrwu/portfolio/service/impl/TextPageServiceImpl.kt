@@ -24,7 +24,6 @@ import java.nio.file.Files
 @Service
 class TextPageServiceImpl : TextPageService {
 
-
     companion object {
         @Slf4j
         lateinit var log: Logger
