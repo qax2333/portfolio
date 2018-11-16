@@ -1,8 +1,8 @@
 package de.ketrwu.portfolio.controller.control
 
-import de.ketrwu.portfolio.forms.CaptchaForm
-import de.ketrwu.portfolio.forms.Form
-import de.ketrwu.portfolio.forms.validation.FormToken
+import de.ketrwu.portfolio.entity.CaptchaForm
+import de.ketrwu.portfolio.entity.Form
+import de.ketrwu.portfolio.entity.validation.FormToken
 import de.ketrwu.portfolio.service.CaptchaService
 import de.ketrwu.portfolio.service.FormTokenService
 import org.springframework.beans.factory.annotation.Autowired

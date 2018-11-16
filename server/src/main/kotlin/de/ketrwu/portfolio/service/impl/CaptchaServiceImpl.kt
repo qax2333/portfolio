@@ -1,7 +1,7 @@
 package de.ketrwu.portfolio.service.impl
 
 import de.ketrwu.portfolio.Slf4j
-import de.ketrwu.portfolio.forms.CaptchaForm
+import de.ketrwu.portfolio.entity.CaptchaForm
 import de.ketrwu.portfolio.service.CaptchaService
 import org.apache.commons.lang.RandomStringUtils
 import org.slf4j.Logger
@@ -21,6 +21,10 @@ import java.util.Base64
 import java.util.Random
 import java.util.UUID
 import javax.imageio.ImageIO
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.indices
+import kotlin.collections.set
 
 /**
  * Service to create captcha images for the frontend and validate captcha answers

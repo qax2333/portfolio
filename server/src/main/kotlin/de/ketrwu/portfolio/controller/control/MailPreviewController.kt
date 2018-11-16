@@ -1,6 +1,6 @@
 package de.ketrwu.portfolio.controller.control
 
-import de.ketrwu.portfolio.forms.ContactForm
+import de.ketrwu.portfolio.entity.ContactForm
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping

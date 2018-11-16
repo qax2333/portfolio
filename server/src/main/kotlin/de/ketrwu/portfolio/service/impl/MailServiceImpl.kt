@@ -2,7 +2,7 @@ package de.ketrwu.portfolio.service.impl
 
 import de.ketrwu.portfolio.Slf4j
 import de.ketrwu.portfolio.exception.MailTemplateException
-import de.ketrwu.portfolio.forms.ContactForm
+import de.ketrwu.portfolio.entity.ContactForm
 import de.ketrwu.portfolio.service.MailService
 import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired

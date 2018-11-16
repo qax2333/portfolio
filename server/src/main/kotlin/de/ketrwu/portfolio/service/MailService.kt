@@ -1,6 +1,6 @@
 package de.ketrwu.portfolio.service
 
-import de.ketrwu.portfolio.forms.ContactForm
+import de.ketrwu.portfolio.entity.ContactForm
 
 /**
  * Service for building, queuing and sending emails

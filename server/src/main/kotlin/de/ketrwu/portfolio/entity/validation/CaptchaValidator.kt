@@ -1,6 +1,6 @@
-package de.ketrwu.portfolio.forms.validation
+package de.ketrwu.portfolio.entity.validation
 
-import de.ketrwu.portfolio.forms.CaptchaForm
+import de.ketrwu.portfolio.entity.CaptchaForm
 import de.ketrwu.portfolio.service.CaptchaService
 import org.springframework.beans.factory.annotation.Autowired
 import javax.validation.Constraint

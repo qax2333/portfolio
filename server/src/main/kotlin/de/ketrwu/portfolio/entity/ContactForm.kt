@@ -1,4 +1,4 @@
-package de.ketrwu.portfolio.forms
+package de.ketrwu.portfolio.entity
 
 import javax.validation.constraints.AssertTrue
 import javax.validation.constraints.Email
