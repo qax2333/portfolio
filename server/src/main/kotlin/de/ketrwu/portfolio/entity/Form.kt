@@ -1,6 +1,6 @@
-package de.ketrwu.portfolio.forms
+package de.ketrwu.portfolio.entity
 
-import de.ketrwu.portfolio.forms.validation.FormToken
+import de.ketrwu.portfolio.entity.validation.FormToken
 import javax.validation.constraints.NotEmpty
 
 /**

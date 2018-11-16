@@ -1,7 +1,7 @@
 package de.ketrwu.portfolio.controller.content
 
 import de.ketrwu.portfolio.controller.control.FormController
-import de.ketrwu.portfolio.forms.ContactForm
+import de.ketrwu.portfolio.entity.ContactForm
 import de.ketrwu.portfolio.service.MailService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller

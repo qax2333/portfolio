@@ -1,6 +1,6 @@
 package de.ketrwu.portfolio.service.impl
 
-import de.ketrwu.portfolio.forms.Form
+import de.ketrwu.portfolio.entity.Form
 import de.ketrwu.portfolio.service.FormTokenService
 import org.springframework.stereotype.Service
 import java.util.UUID

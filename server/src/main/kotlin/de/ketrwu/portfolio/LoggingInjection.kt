@@ -29,8 +29,8 @@ class LoggingInjector : BeanPostProcessor {
                     processObject(companion, loggerName)
                 }
             } catch (ignored: Throwable) {
-                // ignore exceptions, keep the object as it is. not every required class may be found on the classpath as
-                // SpringBoot tries to load not existing stuff as well
+                // ignore exceptions, keep the object as it is. not every required class may be found on the classpath
+                // as SpringBoot tries to load not existing stuff as well
             }
         }
 

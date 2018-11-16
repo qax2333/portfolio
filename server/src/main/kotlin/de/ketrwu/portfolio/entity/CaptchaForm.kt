@@ -1,6 +1,6 @@
-package de.ketrwu.portfolio.forms
+package de.ketrwu.portfolio.entity
 
-import de.ketrwu.portfolio.forms.validation.Captcha
+import de.ketrwu.portfolio.entity.validation.Captcha
 import javax.validation.constraints.NotEmpty
 
 /**

@@ -1,6 +1,6 @@
 package de.ketrwu.portfolio.service
 
-import de.ketrwu.portfolio.forms.Form
+import de.ketrwu.portfolio.entity.Form
 
 /**
  * Service to add valid tokens to forms, offer validation of form tokens and invalidation of tokens

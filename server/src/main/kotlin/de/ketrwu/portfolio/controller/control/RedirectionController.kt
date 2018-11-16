@@ -16,12 +16,12 @@ class RedirectionController {
     private val textPageController: TextPageController? = null
 
     @GetMapping("/impressum", "/imprint")
-    private fun impressum(): String {
-        return textPageController?.getTextPage("imprint") ?: "/"
+    private fun impressum(model: MutableMap<String, Any>): String {
+        return textPageController?.getTextPage("imprint", model) ?: "/"
     }
 
     @GetMapping("/datenschutz", "/datenschutzerklaerung", "/datenschutzerklärung", "/privacy")
-    private fun datenschutz(): String {
-        return textPageController?.getTextPage("privacy") ?: "/"
+    private fun datenschutz(model: MutableMap<String, Any>): String {
+        return textPageController?.getTextPage("privacy", model) ?: "/"
     }
 }

@@ -1,6 +1,6 @@
 package de.ketrwu.portfolio.service
 
-import de.ketrwu.portfolio.forms.CaptchaForm
+import de.ketrwu.portfolio.entity.CaptchaForm
 import java.io.IOException
 
 /**
