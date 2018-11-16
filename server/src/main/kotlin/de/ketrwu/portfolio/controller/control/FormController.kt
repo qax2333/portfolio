@@ -44,8 +44,12 @@ abstract class FormController<T : Form> {
      */
     @PostMapping
     @Throws(IllegalAccessException::class, InstantiationException::class, IOException::class)
-    fun submitForm(@ModelAttribute("form") @Validated _form: T, bindingResult: BindingResult, model: MutableMap<String, Any>): String {
-        var form = _form
+    fun submitForm(
+        @ModelAttribute("form") @Validated formParam: T,
+        bindingResult: BindingResult,
+        model: MutableMap<String, Any>
+    ): String {
+        var form = formParam
         if (!bindingResult.hasErrors()) {
             onSuccess(form)
             formTokenService?.invalidateFormToken(form)
@@ -83,12 +87,12 @@ abstract class FormController<T : Form> {
 
     @Throws(IOException::class, IllegalAccessException::class, InstantiationException::class)
     private fun resetForm(form: T): T {
-        return form.javaClass.newInstance().let {
-            formTokenService?.tokenize(it)
-            if (it is CaptchaForm) {
-                captchaService?.createCaptcha(it)
+        return form.javaClass.newInstance().let { instance ->
+            formTokenService?.tokenize(instance)
+            if (instance is CaptchaForm) {
+                captchaService?.createCaptcha(instance)
             }
-            it
+            instance
         }
     }
 

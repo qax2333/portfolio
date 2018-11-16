@@ -23,7 +23,6 @@ import java.util.UUID
 import javax.imageio.ImageIO
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.collections.indices
 import kotlin.collections.set
 
 /**
@@ -49,13 +48,14 @@ class CaptchaServiceImpl : CaptchaService {
     /**
      * {@inheritDoc}
      */
+    @Suppress("MagicNumber")
     @Throws(IOException::class)
     override fun createCaptcha(captchaForm: CaptchaForm): String {
         val solution = randomString
 
-        UUID.randomUUID().toString().let {
-            captchaForm.captchaToken = it
-            solutions[it] = solution
+        UUID.randomUUID().toString().let { uuid ->
+            captchaForm.captchaToken = uuid
+            solutions[uuid] = solution
         }
 
         val img = BufferedImage(IMG_SIZE[0], IMG_SIZE[1], BufferedImage.TYPE_INT_ARGB)
@@ -66,9 +66,14 @@ class CaptchaServiceImpl : CaptchaService {
 
         for (i in solutionBytes.indices) {
             val at = AffineTransform()
+            val x = (Math.random() * 10).toInt() + i * 20
             at.shear(0.2 * i, 0.0)
             g2d.transform = at
-            g2d.drawString(String(byteArrayOf(solutionBytes[i])), (Math.random() * 10).toInt() + i * 20, (Math.random() * 10 + 20).toInt())
+            g2d.drawString(
+                String(byteArrayOf(solutionBytes[i])),
+                x,
+                (Math.random() * 10 + 20).toInt()
+            )
         }
 
         g2d.dispose()
@@ -76,9 +81,9 @@ class CaptchaServiceImpl : CaptchaService {
         val os = ByteArrayOutputStream()
         ImageIO.write(img, "png", os)
 
-        return Base64.getEncoder().encodeToString(os.toByteArray()).let {
-            captchaForm.captchaImage = it
-            it
+        return Base64.getEncoder().encodeToString(os.toByteArray()).let { encoded ->
+            captchaForm.captchaImage = encoded
+            encoded
         }
     }
 
@@ -141,7 +146,7 @@ class CaptchaServiceImpl : CaptchaService {
         private val RANDOM = Random()
         private val IMG_SIZE = intArrayOf(180, 40)
         private val SOLUTION_LENGTH = intArrayOf(4, 7)
-        private val FONT_SIZE = 20f
+        private const val FONT_SIZE = 20f
 
         @Slf4j
         lateinit var log: Logger

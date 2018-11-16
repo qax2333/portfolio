@@ -2,6 +2,7 @@ package de.ketrwu.portfolio.controller.control
 
 import de.ketrwu.portfolio.Slf4j
 import org.slf4j.Logger
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,9 +17,15 @@ import javax.servlet.http.HttpServletResponse
 @Controller
 class ErrorController : org.springframework.boot.web.servlet.error.ErrorController {
 
-    private val MODEL_KEY_METHOD = "method"
-    private val MODEL_KEY_STATUS_CODE = "statusCode"
-    private val MODEL_KEY_PATH = "path"
+    companion object {
+        private const val MODEL_KEY_METHOD = "method"
+        private const val MODEL_KEY_STATUS_CODE = "statusCode"
+        private const val MODEL_KEY_PATH = "path"
+        const val PATH = "/error"
+
+        @Slf4j
+        lateinit var log: Logger
+    }
 
     /**
      * Mapping for the error path. Logs additional info about the error
@@ -31,8 +38,13 @@ class ErrorController : org.springframework.boot.web.servlet.error.ErrorControll
 
         if (response.status == HttpServletResponse.SC_NOT_FOUND) {
             log.warn("Resource not found at: \"{} {}\"", model[MODEL_KEY_METHOD], model[MODEL_KEY_PATH])
-        } else if (response.status >= 500) {
-            log.error("Server-side error occurred ({}) at path \"{} {}\"", response.status, model[MODEL_KEY_METHOD], model[MODEL_KEY_PATH])
+        } else if (response.status >= HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            log.error(
+                    "Server-side error occurred ({}) at path \"{} {}\"",
+                    response.status,
+                    model[MODEL_KEY_METHOD],
+                    model[MODEL_KEY_PATH]
+            )
         }
 
         return "content/text/error"
@@ -48,12 +60,5 @@ class ErrorController : org.springframework.boot.web.servlet.error.ErrorControll
 
     override fun getErrorPath(): String {
         return PATH
-    }
-
-    companion object {
-        const val PATH = "/error"
-
-        @Slf4j
-        lateinit var log: Logger
     }
 }
