@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{text}">
     <head>
-        <th:block th:replace="~{fragments/site-meta :: site-meta(title=${page.meta.title}, description=${page.meta.description})}"></th:block>
+        <th:block th:replace="~{fragments/site-meta :: site-meta(title=${page.meta.title}, description=${page.meta.description}, publishedAt=${page.meta.publishedAt}, self=${page.getPath()})}"></th:block>
     </head>
 
     <body>
