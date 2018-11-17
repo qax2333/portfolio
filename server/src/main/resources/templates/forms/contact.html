@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{form}">
     <head>
-        <th:block th:replace="~{fragments/site-meta :: site-meta(title='Kontakt', description='Kontaktformular zum Kontaktieren des Webseitenbetreibers')}"></th:block>
+        <th:block th:replace="~{fragments/site-meta :: site-meta(title='Kontakt', description='Kontaktformular zum Kontaktieren des Webseitenbetreibers', publishedAt='2018-01-01', self='/contact')}"></th:block>
     </head>
 
     <th:block layout:fragment="form-title">Schreibe mir eine Nachricht</th:block>

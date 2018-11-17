@@ -1,4 +1,5 @@
 ---
+publishedAt: 2018-11-17
 title: Projekt - Portfolio
 headline: Portfolio
 description: Meine eigene kleine Spielwiese umgesetzt mit Spring Boot. Inklusive Kontaktformular und eigenem Captcha.

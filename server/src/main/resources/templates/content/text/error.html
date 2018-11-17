@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{text}">
     <head>
-        <th:block th:replace="~{fragments/site-meta :: site-meta(title='Fehler!?', description='Es ist ein unbekannter Fehler aufgetreten')}"></th:block>
+        <th:block th:replace="~{fragments/site-meta :: site-meta(title='Fehler!?', description='Es ist ein unbekannter Fehler aufgetreten', publishedAt='2018-01-01', self='/error')}"></th:block>
     </head>
 
     <body>

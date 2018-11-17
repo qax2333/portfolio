@@ -15,6 +15,7 @@ data class MarkdownTextPage(
 
 open class MarkdownMeta(
     open var filename: String?,
+    open var publishedAt: String = "",
     open var title: String = "",
     open var headline: String = "",
     open var description: String = "",
@@ -22,6 +23,7 @@ open class MarkdownMeta(
 ) {
     open fun of(yamlMeta: Map<String, List<String>>): MarkdownMeta {
         title = yamlMeta["title"]!![0]
+        publishedAt = yamlMeta["publishedAt"]?.first() ?: "2018-01-01"
         headline = yamlMeta["headline"]!![0]
         description = yamlMeta["description"]!![0]
         tags = if (yamlMeta.containsKey("tags")) {
@@ -35,12 +37,13 @@ open class MarkdownMeta(
 
 class ProjectMarkdownMeta(
     override var filename: String?,
+    override var publishedAt: String = "",
     override var title: String = "",
     override var headline: String = "",
     override var description: String = "",
     override var tags: List<String> = listOf(),
     var languages: List<String> = listOf()
-) : MarkdownMeta(filename, title, headline, description, tags) {
+) : MarkdownMeta(filename, publishedAt, title, headline, description, tags) {
     override fun of(yamlMeta: Map<String, List<String>>): ProjectMarkdownMeta {
         super.of(yamlMeta)
         languages = if (yamlMeta.containsKey("languages")) {
