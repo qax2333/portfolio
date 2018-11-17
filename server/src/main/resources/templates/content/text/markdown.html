@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{text}">
     <head>
-        <th:block th:replace="~{fragments/site-meta :: site-meta(title=${page.title}, description=${page.description})}"></th:block>
+        <th:block th:replace="~{fragments/site-meta :: site-meta(title=${page.meta.title}, description=${page.meta.description})}"></th:block>
     </head>
 
     <body>
-        <th:block layout:fragment="title" th:text="${page.headline}"></th:block>
-        <th:block layout:fragment="text" th:utext="${page.markdownRendered}"></th:block>
+        <th:block layout:fragment="title" th:text="${page.meta.headline}"></th:block>
+        <th:block layout:fragment="text" th:utext="${page.rendered}"></th:block>
     </body>
 </html>

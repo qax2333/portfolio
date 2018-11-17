@@ -11,7 +11,7 @@ interface TextPageService {
     /**
      * Check if classpath has a Markdown file with given name
      */
-    fun isMarkdownTextPage(page: String): Boolean
+    fun isMarkdownTextPage(page: String, tag: String? = null): Boolean
 
     /**
      * Check if classpath has a html file with given name
@@ -22,4 +22,9 @@ interface TextPageService {
      * Render a Markdown file to HTML
      */
     fun renderMarkdown(page: String): MarkdownTextPage
+
+    /**
+     * Get all pages by specific tag
+     */
+    fun getPages(tag: String): List<MarkdownTextPage>
 }

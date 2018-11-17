@@ -16,31 +16,26 @@
                 </div>
 
                 <div class="section__cards">
+                    <th:block th:each="page : ${@textPageServiceImpl.getPages('project')}">
 
-                    <div class="row">
-
-                        <div class="col-md-2"></div>
-
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Portfolio</h5>
-                                    <p class="card-text">Meine eigene kleine Spielwiese umgesetzt mit Spring Boot. Inklusive Kontaktformular und eigenem Captcha.</p>
-                                    <div class="card-dots">
-                                        <div class="kotlin">Kotlin</div>
-                                        <div class="html">HTML</div>
-                                        <div class="sass">Sass</div>
-                                        <div class="typescript">TypeScript</div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${page.meta.headline}"></h5>
+                                        <p class="card-text" th:text="${page.meta.description}"></p>
+                                        <div class="card-dots">
+                                            <div th:each="lang : ${page.meta.languages}" th:classappend="${lang.toLowerCase()}" th:text="${lang}"></div>
+                                        </div>
+                                        <a th:attr="href=${page.getPath()}" class="card-link btn btn-dark float-right"><i class="fas fa-arrow-right"></i></a>
                                     </div>
-                                    <a href="/page/project-portfolio" class="card-link btn btn-dark float-right"><i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
+                            <div class="col-md-2"></div>
                         </div>
 
-                        <div class="col-md-2"></div>
-
-                    </div>
-
+                    </th:block>
                 </div>
             </div>
         </div>

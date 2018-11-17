@@ -1,8 +1,6 @@
 package de.ketrwu.portfolio.controller.content
 
-import de.ketrwu.portfolio.Slf4j
 import de.ketrwu.portfolio.service.TextPageService
-import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -35,8 +33,17 @@ class TextPageController {
         }
     }
 
-    companion object {
-        @Slf4j
-        lateinit var log: Logger
+    /**
+     * Mapping that looks for path-variable page in classpath and serves it at its tags-based path
+     */
+    @GetMapping("/page/{tag}/{page}")
+    fun getTaggedTextPage(@PathVariable tag: String, @PathVariable page: String, model: MutableMap<String, Any>): String {
+        return when {
+            textPageService!!.isMarkdownTextPage(page, tag) -> {
+                model["page"] = textPageService.renderMarkdown(page)
+                "content/text/markdown"
+            }
+            else -> "content/text/error"
+        }
     }
 }
