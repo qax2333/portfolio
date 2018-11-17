@@ -1,9 +1,15 @@
 ---
 title: Projekt - Portfolio
 headline: Portfolio
-description: Beschreibung des Projekts Portfolio
+description: Meine eigene kleine Spielwiese umgesetzt mit Spring Boot. Inklusive Kontaktformular und eigenem Captcha.
 tags: 
   - project
+project:
+  languages:
+    - Kotlin
+    - HTML
+    - Sass
+    - TypeScript
 ---
 Mit Portfolio will ich mir eine eigene kleine Spielwiese schaffen und Sachen ausprobieren, die ich schon länger ausprobieren wollte.
 

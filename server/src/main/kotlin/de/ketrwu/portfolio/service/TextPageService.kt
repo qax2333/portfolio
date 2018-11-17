@@ -22,4 +22,9 @@ interface TextPageService {
      * Render a Markdown file to HTML
      */
     fun renderMarkdown(page: String): MarkdownTextPage
+
+    /**
+     * Get all pages by specific tag
+     */
+    fun getPages(tag: String): List<MarkdownTextPage>
 }
