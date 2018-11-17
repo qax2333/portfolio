@@ -47,11 +47,17 @@ class TextPageServiceImpl : TextPageService {
                 .build()
     }
 
-    private fun getResource(fileWithoutExtension: String, extension: String, path: String): Resource? {
+    private fun getResource(fileWithoutExtension: String, extension: String, path: String, recursive: Boolean): Resource? {
         val cl = this.javaClass.classLoader
         val resolver = PathMatchingResourcePatternResolver(cl)
+        var matcher = "classpath*:$path/"
+        if (recursive) {
+            matcher += "**/"
+        }
+        matcher += "*.$extension"
+
         try {
-            for (resource in resolver.getResources("classpath*:$path/*.$extension")) {
+            for (resource in resolver.getResources(matcher)) {
                 val found = resource.filename?.let {
                     return@let it.replace(".$extension", "").equals(fileWithoutExtension, ignoreCase = true)
                 } ?: false
@@ -65,29 +71,29 @@ class TextPageServiceImpl : TextPageService {
         return null
     }
 
-    private fun resourceExists(fileWithoutExtension: String, extension: String, path: String): Boolean {
-        return getResource(fileWithoutExtension, extension, path)?.exists() ?: false
+    private fun resourceExists(fileWithoutExtension: String, extension: String, path: String, recursive: Boolean): Boolean {
+        return getResource(fileWithoutExtension, extension, path, recursive)?.exists() ?: false
     }
 
     /**
      * {@inheritDoc}
      */
     override fun isMarkdownTextPage(page: String): Boolean {
-        return resourceExists(page, "md", "/templates/content/text/markdown")
+        return resourceExists(page, "md", "/templates/content/text/markdown", true)
     }
 
     /**
      * {@inheritDoc}
      */
     override fun isHtmlTextPage(page: String): Boolean {
-        return resourceExists(page, "html", "/templates/content/text")
+        return resourceExists(page, "html", "/templates/content/text", false)
     }
 
     /**
      * {@inheritDoc}
      */
     override fun renderMarkdown(page: String): MarkdownTextPage {
-        return getResource(page, "md", "/templates/content/text/markdown")?.let { resource ->
+        return getResource(page, "md", "/templates/content/text/markdown", true)?.let { resource ->
             val markdown = FileCopyUtils.copyToString(InputStreamReader(
                 resource.inputStream,
                 charset("UTF-8")
