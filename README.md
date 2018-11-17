@@ -1,6 +1,6 @@
 # Portfolio
 
-> :de: Du willst mehr über meine Webseite und ihre Technologien wissen? [Schau hier](https://kenneth.wussmann.net/page/project-portfolio)
+> :de: Du willst mehr über meine Webseite und ihre Technologien wissen? [Schau hier](https://kenneth.wussmann.net/page/project/portfolio)
 
 [My personal website](https://kenneth.wussmann.net) powered by
 

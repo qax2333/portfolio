@@ -1,6 +1,7 @@
 package de.ketrwu.portfolio.service.impl
 
 import de.ketrwu.portfolio.Slf4j
+import de.ketrwu.portfolio.entity.MarkdownMeta
 import de.ketrwu.portfolio.entity.MarkdownTextPage
 import de.ketrwu.portfolio.service.TextPageService
 import org.commonmark.ext.autolink.AutolinkExtension
@@ -78,8 +79,13 @@ class TextPageServiceImpl : TextPageService {
     /**
      * {@inheritDoc}
      */
-    override fun isMarkdownTextPage(page: String): Boolean {
-        return resourceExists(page, "md", "/templates/content/text/markdown", true)
+    override fun isMarkdownTextPage(page: String, tag: String?): Boolean {
+        val exists = resourceExists(page, "md", "/templates/content/text/markdown", true)
+        return when {
+            tag == null -> exists
+            exists -> renderMarkdown(page).meta.tags.contains(tag.toLowerCase())
+            else -> false
+        }
     }
 
     /**
@@ -101,12 +107,8 @@ class TextPageServiceImpl : TextPageService {
             val node = markdownParser.parse(markdown)
             val yamlFrontMatterVisitor = YamlFrontMatterVisitor()
             node.accept(yamlFrontMatterVisitor)
-
-            val title = yamlFrontMatterVisitor.data["title"]!![0]
-            val headline = yamlFrontMatterVisitor.data["headline"]!![0]
-            val description = yamlFrontMatterVisitor.data["description"]!![0]
             val rendered = htmlRenderer.render(node)
-            return MarkdownTextPage(title, headline, description, rendered)
+            return MarkdownTextPage(rendered, MarkdownMeta.of(page, yamlFrontMatterVisitor.data))
         } ?: MarkdownTextPage()
     }
 }

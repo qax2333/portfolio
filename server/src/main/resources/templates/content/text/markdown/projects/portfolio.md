@@ -2,6 +2,8 @@
 title: Projekt - Portfolio
 headline: Portfolio
 description: Beschreibung des Projekts Portfolio
+tags: 
+  - project
 ---
 Mit Portfolio will ich mir eine eigene kleine Spielwiese schaffen und Sachen ausprobieren, die ich schon länger ausprobieren wollte.
 
