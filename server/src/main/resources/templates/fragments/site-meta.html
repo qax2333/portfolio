@@ -3,6 +3,19 @@
 
     <title th:text="${title}"></title>
     <meta name="description" th:attr="content=${description}" />
-    <meta name="twitter:card" th:attr="value=${description}" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ketrwu">
+    <meta name="twitter:title" th:attr="content=${title}">
+    <meta name="twitter:description" th:attr="content=${description}">
+    <meta name="twitter:image" content="https://kenneth.wussmann.net/static/img/avatar.png">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" th:attr="content=${title}">
+    <meta property="og:site_name" content="Kenneth Wußmann">
+    <meta property="og:url" th:attr="content='https://kenneth.wussmann.net' + ${self}">
+    <meta property="og:image" content="https://kenneth.wussmann.net/static/img/avatar.png">
+    <meta property="article:published_time" th:attr="content=${publishedAt}">
+    <meta property="article:author" content="https://kenneth.wussmann.net/">
 
 </thymeleaf>

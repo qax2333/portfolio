@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{text}">
     <head>
-        <th:block th:replace="~{fragments/site-meta :: site-meta(title='Datenschutzerklärung', description='Datenschutzerklärung')}"></th:block>
+        <th:block th:replace="~{fragments/site-meta :: site-meta(title='Datenschutzerklärung', description='Datenschutzerklärung', publishedAt='2018-01-01', self='/privacy')}"></th:block>
     </head>
 
     <th:block layout:fragment="title">Daten&shy;schutz&shy;erklärung</th:block>
