@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven'
-        jdk 'JDK8'
+        maven 'mvn-3.6'
+        jdk 'oracle-jdk-8'
     }
     stages {
         stage('Build') {
