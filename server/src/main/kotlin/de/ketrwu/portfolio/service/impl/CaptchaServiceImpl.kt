@@ -42,7 +42,6 @@ class CaptchaServiceImpl : CaptchaService {
     /**
      * {@inheritDoc}
      */
-    @Suppress("MagicNumber")
     @Throws(IOException::class)
     override fun createCaptcha(captchaForm: CaptchaForm): String {
         val challenge = generateCaptchaChallenge()
@@ -111,6 +110,7 @@ class CaptchaServiceImpl : CaptchaService {
         ).toLowerCase()
     }
 
+    @Suppress("MagicNumber")
     private fun generateCaptchaChallenge(
         length: Int = RANDOM.nextInt(SOLUTION_LENGTH[1] - SOLUTION_LENGTH[0] + 1) + SOLUTION_LENGTH[0]
     ): CaptchaReloadResponse {
