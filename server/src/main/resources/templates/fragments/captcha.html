@@ -6,10 +6,18 @@
         <div class="col-md-4 captcha__content">
             <img class="captcha__img" th:attr="src=${'data:image/png;base64, ' + form.captchaImage}" />
             <div class="form-group">
-                <input type="text" name="captchaResponse" class="form-control" aria-describedby="inputEmailHelp" th:classappend="${#fields.hasErrors('form')} ? 'is-invalid' : ''" required>
+                <div class="input-group mb-3">
+                    <input type="text" name="captchaResponse" class="form-control" aria-describedby="btn-captcha-reload" th:classappend="${#fields.hasErrors('form')} ? 'is-invalid' : ''" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="button" id="btn-captcha-reload"><i class="fas fa-redo-alt"></i></button>
+                    </div>
+                </div>
                 <small id="inputEmailHelp" class="form-text text-muted">Schreibe den Text auf dem Bild hier rein.</small>
             </div>
         </div>
+
+
+
     </div>
 
 </thymeleaf>

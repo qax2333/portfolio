@@ -37,7 +37,11 @@ class TextPageController {
      * Mapping that looks for path-variable page in classpath and serves it at its tags-based path
      */
     @GetMapping("/page/{tag}/{page}")
-    fun getTaggedTextPage(@PathVariable tag: String, @PathVariable page: String, model: MutableMap<String, Any>): String {
+    fun getTaggedTextPage(
+        @PathVariable tag: String,
+        @PathVariable page: String,
+        model: MutableMap<String, Any>
+    ): String {
         return when {
             textPageService!!.isMarkdownTextPage(page, tag) -> {
                 model["page"] = textPageService.renderMarkdown(page)
