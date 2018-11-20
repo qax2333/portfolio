@@ -1,6 +1,8 @@
 package de.ketrwu.portfolio.service
 
 import de.ketrwu.portfolio.entity.CaptchaForm
+import de.ketrwu.portfolio.entity.api.CaptchaReloadRequest
+import de.ketrwu.portfolio.entity.api.CaptchaReloadResponse
 import java.io.IOException
 
 /**
@@ -23,4 +25,9 @@ interface CaptchaService {
      * Load captcha fonts randomly used for captcha creation
      */
     fun loadFonts()
+
+    /**
+     * Invalidate old captcha and generate a new BASE64 image
+     */
+    fun reloadCaptcha(captchaReloadRequest: CaptchaReloadRequest): CaptchaReloadResponse?
 }
