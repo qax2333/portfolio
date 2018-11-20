@@ -12,12 +12,10 @@ import org.springframework.context.event.EventListener
 import org.springframework.core.io.Resource
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.stereotype.Service
-import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
 import java.awt.FontFormatException
 import java.awt.geom.AffineTransform
-import java.awt.geom.Path2D
 import java.awt.geom.QuadCurve2D
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
@@ -26,8 +24,6 @@ import java.util.Base64
 import java.util.Random
 import java.util.UUID
 import javax.imageio.ImageIO
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.collections.set
 
 /**
