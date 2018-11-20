@@ -67,10 +67,16 @@ class TextPageServiceImpl : TextPageService {
         return arrayOf()
     }
 
-    private fun getResource(fileWithoutExtension: String, extension: String, path: String, recursive: Boolean): Resource? {
+    private fun getResource(
+        fileWithoutExtension: String,
+        extension: String,
+        path: String,
+        recursive: Boolean
+    ): Resource? {
         for (resource in getResources(extension, path, recursive)) {
             val found = resource.filename?.let {
-                return@let it.replace(".$extension", "").equals(fileWithoutExtension, ignoreCase = true)
+                return@let it.replace(".$extension", "")
+                    .equals(fileWithoutExtension, ignoreCase = true)
             } ?: false
             if (found) {
                 return resource
@@ -79,7 +85,12 @@ class TextPageServiceImpl : TextPageService {
         return null
     }
 
-    private fun resourceExists(fileWithoutExtension: String, extension: String, path: String, recursive: Boolean): Boolean {
+    private fun resourceExists(
+        fileWithoutExtension: String,
+        extension: String,
+        path: String,
+        recursive: Boolean
+    ): Boolean {
         return getResource(fileWithoutExtension, extension, path, recursive)?.exists() ?: false
     }
 

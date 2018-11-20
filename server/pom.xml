@@ -7,7 +7,7 @@
         <groupId>de.ketrwu.portfolio</groupId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
-    <version>2.2.1</version>
+    <version>2.3.0</version>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
     <artifactId>server</artifactId>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>de.ketrwu.portfolio</groupId>
             <artifactId>webdesign</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
 
         <dependency>
