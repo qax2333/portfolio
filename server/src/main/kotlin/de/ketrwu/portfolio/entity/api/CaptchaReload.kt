@@ -6,7 +6,6 @@ class CaptchaReloadRequest {
 
     @NotEmpty
     var token: String? = null
-
 }
 
 data class CaptchaReloadResponse(

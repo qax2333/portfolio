@@ -22,5 +22,4 @@ class CaptchaController {
             ResponseEntity.ok(it)
         } ?: ResponseEntity.badRequest().build()
     }
-
 }
