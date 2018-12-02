@@ -26,7 +26,7 @@ nur kostengünstig. Momentan hoste ich eine Instanz auf der kleinsten DigitalOce
 Natürlich kann das AWS API-Gateway noch einiges mehr. Allerdings möchte ich mit function-gateway keine identische Kopie 
 entwickeln. Sollte ich aber mal weitere Features benötigen, hab ich schon eine gute Basis.
 
-Wichtig war mir, dass der Development und Deployment-Flow gleich bleibt. So habe ich vorher das [Serverless Framework]() 
+Wichtig war mir, dass der Development und Deployment-Flow gleich bleibt. So habe ich vorher das [Serverless Framework](https://serverless.com/) 
 genutzt um meine API sehr einfach auf AWS bereitstellen zu können. Das Serverless Framework nimmt einem dabei die komplette
 Konfiguration des API-Gateway von AWS ab. Das wollte ich mit function-gateway ebenso einfach und schnell haben und habe dazu
 ein Serverless Plugin geschrieben: [serverless-function-gateway](https://github.com/KennethWussmann/serverless-function-gateway).
